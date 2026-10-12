@@ -8,6 +8,7 @@ class Solution:
         return max_ans
 
 
+
 class Solution:
     def maxSubArray(self, nums: list[int]) -> int:
         for i, n in enumerate(nums[1:], start=1):
