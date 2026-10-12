@@ -37,5 +37,21 @@ from collections import Counter
 #             return s[k:k+sm]
 
 
-
-
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        res = ""
+        t_counter = Counter(t)
+        r_counter = Counter()
+        left = 0
+        right = 0
+        n = 99999999
+        for i in s:
+            r_counter[i] += 1
+            right += 1
+            while r_counter >= t_counter:
+                if n > right - left:
+                    res = s[left:right]
+                    n = right - left
+                r_counter[s[left]] -= 1
+                left += 1
+        return res
