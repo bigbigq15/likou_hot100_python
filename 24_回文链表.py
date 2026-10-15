@@ -32,21 +32,21 @@ class Solution:
     #         else:
     #             return False
     #     return True
-    def isPalindrome(self, head: Optional[ListNode]) -> bool:
-        left = head
-
-        def is_pal(right: Optional[ListNode]) -> bool:
-            # 「递」，先把 right 移到链表末尾
-            if right.next and not is_pal(right.next):
-                return False
-            # 「归」的过程就是在从右到左遍历链表
-            nonlocal left
-            if left.val != right.val:
-                return False
-            left = left.next  # left 往右走
-            return True  # 归，right 会往左走
-
-        return is_pal(head)
+    # def isPalindrome(self, head: Optional[ListNode]) -> bool:
+    #     left = head
+    #
+    #     def is_pal(right: Optional[ListNode]) -> bool:
+    #         # 「递」，先把 right 移到链表末尾
+    #         if right.next and not is_pal(right.next):
+    #             return False
+    #         # 「归」的过程就是在从右到左遍历链表
+    #         nonlocal left
+    #         if left.val != right.val:
+    #             return False
+    #         left = left.next  # left 往右走
+    #         return True  # 归，right 会往左走
+    #
+    #     return is_pal(head)
 
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
         left = head
@@ -62,3 +62,32 @@ class Solution:
                 return False
 
         return is_pal(head)
+
+    def get_mid(self, head: Optional[ListNode]):
+        mid = head
+        right = head
+        while right and right.next:
+            right = right.next.next
+            mid = mid.next
+        return mid
+
+    def reverse_list(self, head: Optional[ListNode]):
+        pre = None
+        while head:
+            nxt = head.next
+            head.next = pre
+            pre = head
+            head = nxt
+        return pre
+
+    def isPalindrome(self, head: Optional[ListNode]) -> bool:
+        mid = self.get_mid(head)
+        r, right = self.reverse_list(mid)
+        while right:
+            if right.val != head.val:
+                self.reverse_list(r)
+                return False
+            right = right.next
+            head = head.next
+        self.reverse_list(r)
+        return True
