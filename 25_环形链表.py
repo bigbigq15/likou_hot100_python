@@ -21,9 +21,9 @@ class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
         slow = head
         fast = head
-        while fast != None:
-            slow = head.next
-            fast = head.next.next
+        while fast != None and fast.next != None:
+            slow = slow.next
+            fast = fast.next.next
             if slow == fast:
                 return True
         return False
