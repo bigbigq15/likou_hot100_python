@@ -54,8 +54,6 @@ class Solution:
         return r.next
 
 
-
-
 class Solution:
     # l1 和 l2 为当前遍历的节点，carry 为进位
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode], carry=0) -> Optional[ListNode]:
@@ -72,3 +70,23 @@ class Solution:
 
         # s 除以 10 的余数为当前节点值，商为进位
         return ListNode(s % 10, self.addTwoNumbers(l1, l2, s // 10))
+
+
+class Solution:
+    def addTwoNumbers(self, l1: ListNode | None, l2: ListNode | None) -> ListNode | None:
+        res = cur = ListNode(0)
+        v = 0
+        s = 0
+        while l1 or l2 or v:
+            s += v
+            if l1:
+                s += l1.val
+                l1 = l1.next
+            if l2:
+                s += l2.val
+                l2 = l2.next
+            v = s // 10
+            res.next = ListNode(s % 10)
+            res = res.next
+            s = 0
+        return cur.next
