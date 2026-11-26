@@ -7,6 +7,7 @@ class ListNode:
         self.val = val
         self.next = next
 
+
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
         a = headA
@@ -15,3 +16,10 @@ class Solution:
             a = a.next if a else headB
             b = b.next if b else headA
         return a
+
+
+class Solution:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
+        a = headA
+        b = headB
+
