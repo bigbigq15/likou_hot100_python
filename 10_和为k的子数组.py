@@ -40,3 +40,10 @@ class Solution:
                 res += mp[pre - k]
             mp[pre] += 1
         return res
+
+
+
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        res = 0
+        mp = Counter()
