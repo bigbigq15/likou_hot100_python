@@ -72,3 +72,22 @@ class Solution:
         for pre, suf, h in zip(left, right, height):
             res += min(pre, suf) - h
         return res
+
+
+class Solution:
+    def trap(self, height: list[int]) -> int:
+        n = len(height)
+        left = n * [0]
+        right = n * [0]
+        pre_max = 0
+        suf_max = 0
+        res = 0
+        for i in range(n):
+            pre_max = max(pre_max, height[i])
+            left[i] = pre_max
+        for i in range(n - 1, -1, -1):
+            suf_max = max(suf_max, height[i])
+            right[i] = suf_max
+        for pre, suf, h in zip(left, right, height):
+            res += min(pre, suf) - h
+        return res
