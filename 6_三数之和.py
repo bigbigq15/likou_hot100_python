@@ -72,3 +72,31 @@ class Solution:
                     while j < k and nums[k] == nums[k + 1]:
                         k -= 1
         return ans
+
+
+class Solution:
+    def threeSum(self, nums: list[int]) -> list[list[int]]:
+        nums.sort()
+        ans = []
+        n = len(nums)
+        for i in range(n - 2):
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
+            x = nums[i]
+            left = i + 1
+            right = n - 1
+            while left < right:
+                s = nums[left] + nums[right] + x
+                if s > 0:
+                    right = right - 1
+                elif s < 0:
+                    left = left + 1
+                else:
+                    ans.append([x,nums[left], nums[right]])
+                    while left < right and nums[left + 1] == nums[left]:
+                        left = left + 1
+                    while left < right and nums[right - 1] == nums[right]:
+                        right = right - 1
+                    left = left + 1
+                    right = right -1
+        return ans
